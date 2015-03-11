@@ -28,6 +28,7 @@
 #include "output.h" // dprintf
 #include "string.h" // memset
 #include "util.h" // kbd_init
+#include "tpm.h" //vtpm4hvm_setup
 
 
 /****************************************************************
@@ -151,6 +152,8 @@ device_hardware_setup(void)
     esp_scsi_setup();
     megasas_setup();
     pvscsi_setup();
+    if (runningOnXen())
+        vtpm4hvm_setup();
 }
 
 static void
